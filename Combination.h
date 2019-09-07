@@ -5,6 +5,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include "Settings.h"
 using namespace std;
 
 class Combination {
@@ -20,14 +21,14 @@ class Combination {
 		c.combination = nullptr;
 	}
 
-	void del() {
+	void erase() {
 		delete[] combination;
 	}
 
 public:
 
-	Combination(int length = 4) {
-		combination = new char[this->length = length];
+	Combination() {
+		combination = new char[length = Settings::getLengthOfCombination()];
 	}
 
 	Combination(const Combination &c) {
@@ -39,12 +40,12 @@ public:
 	}
 
 	~Combination() {
-		del();
+		erase();
 	}
 
 	Combination& operator=(const Combination &c) {
 		if (this != &c) {
-			del();
+			erase();
 			copy(c);
 		}
 		return *this;
@@ -52,18 +53,14 @@ public:
 
 	Combination& operator=(Combination &&c) {
 		if (this != &c) {
-			del();
+			erase();
 			move(c);
 		}
 		return *this;
 	}
 
-	int getLength() const {
-		return length;
-	}
-
-	static void createRandomCombination(Combination &c);
-	void similarity(const Combination &) const;
+	static Combination* createRandomCombination();
+	void printSimilarity(const Combination &ultimate) const; // For example, prints two signs are in place and one is out of place, like this O | O | X | 
 
 	friend istream& operator>>(istream &, Combination &);
 	friend ostream& operator<<(ostream &, const Combination &);

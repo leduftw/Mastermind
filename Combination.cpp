@@ -3,76 +3,77 @@
 
 void Combination::copy(const Combination &c) {
 	combination = new char[length = c.length];
-	for (int i = 0; i < c.length; i++)
+	for (int i = 0; i < length; i++)
 		combination[i] = c.combination[i];
 }
 
-void Combination::createRandomCombination(Combination &c) {
-	int length = c.length;
+Combination* Combination::createRandomCombination() {
+	Combination *c = new Combination();
 	double rnd;
 
 	srand(time(nullptr));
 	for (int i = 0; i < 50; i++)
 		rnd = rand();
 
-	for (int i = 0; i < length; i++) {
+	for (int i = 0; i < c->length; i++) {
 		rnd = rand() / (double)RAND_MAX;
 
 		if (rnd < 1. / 6)
-			c.combination[i] = 'P';
+			c->combination[i] = 'P';
 		else if (rnd < 2. / 6)
-			c.combination[i] = 'T';
+			c->combination[i] = 'K';
 		else if (rnd < 3. / 6)
-			c.combination[i] = 'K';
+			c->combination[i] = 'T';
 		else if (rnd < 4. / 6)
-			c.combination[i] = 'H';
+			c->combination[i] = 'H';
 		else if (rnd < 5. / 6)
-			c.combination[i] = 'S';
+			c->combination[i] = 'Z';
 		else
-			c.combination[i] = 'Z';
+			c->combination[i] = 'S';
 	}
+
+	return c;
 }
 
 istream& operator>>(istream &is, Combination &c) {
-	int length = c.getLength();
-	char *comb = new char[length];
-	bool valid = true;
+	bool valid = true; // Indicates whether or not player's input is valid
 	do {
 		valid = true;
-		for (int i = 0; i < length; i++) {
-			is >> comb[i];
-			if (comb[i] != 'P' && comb[i] != 'K' && comb[i] != 'T' && comb[i] != 'H' && comb[i] != 'Z' && comb[i] != 'S')
+		for (int i = 0; i < c.length; i++) {
+			is >> c.combination[i];
+			if (c.combination[i] != 'P' && c.combination[i] != 'K' 
+				&& c.combination[i] != 'T' && c.combination[i] != 'H' 
+				&& c.combination[i] != 'Z' && c.combination[i] != 'S')
 				valid = false;
-		}
+		} // If at least one char is not valid, the whole combination is not valid and the player should input new one
 	} while (!valid);
-
-	for (int i = 0; i < length; i++)
-		c.combination[i] = comb[i];
-	delete[] comb;
 	return is;
 }
 
 ostream& operator<<(ostream &os, const Combination &c) {
-	for (int i = 0; i < c.getLength(); i++)
+	for (int i = 0; i < c.length; i++)
 		os << c.combination[i] << " ";
 	return os;
 }
 
 bool operator==(const Combination &c1, const Combination &c2) {
-	if (c1.getLength() != c2.getLength())
+	if (c1.length != c2.length)
 		return false;
 
-	for (int i = 0; i < c1.getLength(); i++)
+	for (int i = 0; i < c1.length; i++)
 		if (c1.combination[i] != c2.combination[i])
 			return false;
 	return true;
 }
 
-void Combination::similarity(const Combination &c) const {
-	if (length != c.length)
+// End-to-end solution :)
+void Combination::printSimilarity(const Combination &ultimate) const {
+	if (length != ultimate.length) {
+		cout << "Error! Combinations don't have equal length." << endl;
 		return;
+	}
 
-	Combination cpyCurr = *this, cpy = c;
+	Combination cpyCurr = *this, cpy = ultimate;
 	int inPlace = 0, outOfPlace = 0;
 
 	for (int i = 0; i < length; i++)
