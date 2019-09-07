@@ -31,7 +31,7 @@ public:
 	int printMainMenu()                  const; // Prints main menu and returns choice that player selects
 	int printSettings()                  const; // Prints settings menu and returns choice that player select
 	void printGameInfo(bool &firstGame)  const; // Prints rules and signs
-	void solvedCorrectly()				 const;	// If player guessed correctly
+	void solvedCorrectly()               const; // If player guessed correctly
 	void gameOver(Combination *ultimate) const; // If player ran out of tries
 
 };
