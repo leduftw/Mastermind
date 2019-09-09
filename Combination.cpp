@@ -112,6 +112,4 @@ void Combination::printSimilarity(const Combination &ultimate) const {
 	for (int i = 0; i < all; i++)
 		cout << (i == all - 1 ? " " : " | ");
 	cout << endl;
-	if (inPlace + outOfPlace)
-		cout << endl;
 }

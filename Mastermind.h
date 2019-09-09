@@ -6,7 +6,7 @@
 
 class Mastermind {
 
-	bool firstGame = true, end = false, correct = false, settings = false;
+	bool firstGame = true, end = false, settings = false;
 	int choice = 0;
 
 	Combination *player = nullptr, *ultimate = nullptr;

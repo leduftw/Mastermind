@@ -10,7 +10,6 @@ void Mastermind::erasePreviousCombinations() {
 
 void Mastermind::setStateForNewGame() {
 	erasePreviousCombinations();
-	correct = false; // Player hasn't yet guessed right combination
 	player = new Combination();
 	ultimate = Combination::createRandomCombination();
 }
@@ -50,18 +49,13 @@ void Mastermind::start() {
 			setStateForNewGame();
 			TextUserInterface::getInstance().printGameInfo(firstGame);
 
-			for (int i = 0; i < Settings::getInstance().getNumberOfTries(); i++) {
-				correct = makeGuess(i);
-				if (correct) {
+			for (int i = 0; i < Settings::getInstance().getNumberOfTries(); i++)
+				if (makeGuess(i) == true) {
 					TextUserInterface::getInstance().solvedCorrectly();
 					break;
-				}
-			}
-
-			if (!correct) {
-				TextUserInterface::getInstance().gameOver(ultimate);
-			}
-			break;
+				} else if(i == Settings::getInstance().getNumberOfTries() - 1) // we missed and it is our last try
+					TextUserInterface::getInstance().gameOver(ultimate);
+			break; // case 1
 
 		case 2: // MODIFY SETTINGS
 			while (settings) {
