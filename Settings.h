@@ -2,35 +2,39 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
+// Singleton
 class Settings {
 
-	static int lengthOfCombination, numberOfTries;
+	int lengthOfCombination = 4, numberOfTries = 6;
+
+	Settings() { }
 
 public:
 
-	Settings() = delete;
+	static Settings& getInstance() {
+		static Settings s;
+		return s;
+	}
+
 	Settings(const Settings &) = delete;
 	void operator=(const Settings &) = delete;
 
-	static int getLengthOfCombination() {
+	int getLengthOfCombination() const {
 		return lengthOfCombination;
 	}
 
-	static int getNumberOfTries() {
+	int getNumberOfTries() const {
 		return numberOfTries;
 	}
 
-	static void setLengthOfCombination(int len) {
+	void setLengthOfCombination(int len) {
 		lengthOfCombination = len;
 	}
 
-	static void setNumberOfTries(int num) {
+	void setNumberOfTries(int num) {
 		numberOfTries = num;
 	}
 
 };
-
-int Settings::lengthOfCombination = 4;
-int Settings::numberOfTries = 6;
 
 #endif

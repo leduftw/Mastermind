@@ -28,7 +28,7 @@ class Combination {
 public:
 
 	Combination() {
-		combination = new char[length = Settings::getLengthOfCombination()];
+		combination = new char[length = Settings::getInstance().getLengthOfCombination()];
 	}
 
 	Combination(const Combination &c) {

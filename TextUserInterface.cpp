@@ -15,13 +15,13 @@ void TextUserInterface::printSigns() const {
 }
 
 void TextUserInterface::printRules() const {
-	int lengthOfCombination = Settings::getLengthOfCombination();
-	int numberOfTries = Settings::getNumberOfTries();
+	int lenOfComb = Settings::getInstance().getLengthOfCombination();
+	int numOfTries = Settings::getInstance().getNumberOfTries();
 
 	cout << "\nPRAVILA:\n";
-	cout << "1. Imate " << numberOfTries << (numberOfTries == 1 ? " pokusaj" : " pokusaja") << " da pogodite tacnu kombinaciju "
-		<< "koja se sastoji od " << lengthOfCombination << " simbola." << endl;
-	cout << "2. Kombinaciju unosite tako sto ukucate niz od " << lengthOfCombination << " karaktera, gde svaki karakter u nizu" << endl
+	cout << "1. Imate " << numOfTries << (numOfTries == 1 ? " pokusaj" : " pokusaja") << " da pogodite tacnu kombinaciju "
+		<< "koja se sastoji od " << lenOfComb << " simbola." << endl;
+	cout << "2. Kombinaciju unosite tako sto ukucate niz od " << lenOfComb << " karaktera, gde svaki karakter u nizu" << endl
 		<< "predstavlja oznaku simbola, pri cemu je svaki simbol odvojen jednim znakom razmaka od prethodnog simbola.\n";
 	cout << "3. Simbole obavezno kucati velikim slovima!\n\n";
 	printSigns();
@@ -66,8 +66,8 @@ void TextUserInterface::printGameInfo(bool &firstGame) const {
 
 	// In every other game, player only gets info about length of combination and number of tries
 	if (!firstGame)
-		cout << endl << "Duzina kombinacije: " << Settings::getLengthOfCombination() << endl
-		<< "Broj pokusaja: " << Settings::getNumberOfTries() << endl;
+		cout << endl << "Duzina kombinacije: " << Settings::getInstance().getLengthOfCombination() << endl
+		<< "Broj pokusaja: " << Settings::getInstance().getNumberOfTries() << endl;
 	firstGame = false;
 }
 
@@ -76,6 +76,6 @@ void TextUserInterface::solvedCorrectly() const {
 }
 
 void TextUserInterface::gameOver(Combination *ultimate) const {
-	cout << "Game over :(" << endl;
+	cout << endl << "Game over :(" << endl;
 	cout << "Zamisljena kombinacija: " << *ultimate << endl;
 }

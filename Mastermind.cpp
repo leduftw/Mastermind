@@ -28,17 +28,17 @@ bool Mastermind::makeGuess(int guessCnt) {
 void Mastermind::changeLengthOfCombination() const {
 	cout << "\nUnesite novu duzinu kombinacije: ";
 
-	int length;
-	cin >> length;
-	Settings::setLengthOfCombination(length);
+	int len;
+	cin >> len;
+	Settings::getInstance().setLengthOfCombination(len);
 }
 
 void Mastermind::changeNumberOfTries() const {
 	cout << "\nUnesite novi broj pokusaja: ";
 
-	int numberOfTries;
-	cin >> numberOfTries;
-	Settings::setNumberOfTries(numberOfTries);
+	int num;
+	cin >> num;
+	Settings::getInstance().setNumberOfTries(num);
 }
 
 void Mastermind::start() {
@@ -50,7 +50,7 @@ void Mastermind::start() {
 			setStateForNewGame();
 			TextUserInterface::getInstance().printGameInfo(firstGame);
 
-			for (int i = 0; i < Settings::getNumberOfTries(); i++) {
+			for (int i = 0; i < Settings::getInstance().getNumberOfTries(); i++) {
 				correct = makeGuess(i);
 				if (correct) {
 					TextUserInterface::getInstance().solvedCorrectly();
