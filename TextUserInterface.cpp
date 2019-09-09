@@ -72,10 +72,10 @@ void TextUserInterface::printGameInfo(bool &firstGame) const {
 }
 
 void TextUserInterface::solvedCorrectly() const {
-	cout << "Cestitamo, pogodili ste tacnu kombinaciju!" << endl << endl;
+	cout << "Cestitamo, pogodili ste tacnu kombinaciju!" << endl;
 }
 
 void TextUserInterface::gameOver(Combination *ultimate) const {
-	cout << endl << "Game over :(" << endl;
+	cout << "Game over :(" << endl;
 	cout << "Zamisljena kombinacija: " << *ultimate << endl;
 }

@@ -2,7 +2,7 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
-// Singleton
+// Singleton pattern
 class Settings {
 
 	int lengthOfCombination = 4, numberOfTries = 6;
