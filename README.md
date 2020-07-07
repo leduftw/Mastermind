@@ -1,2 +1,2 @@
 # Mastermind
-Simple text-based UI implementation of game Skocko from Serbian quiz Slagalica
+Simple text-based UI implementation of game Skocko from quiz Slagalica
